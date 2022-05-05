@@ -1,22 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import WeatherService from './WeatherService';
+import WeatherText from './WeatherText';
 
 function App() {
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit Hello world<code>src/App.js</code> and Hello5555!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <WeatherText text="Погода на сегодня"/>
       </header>
     </div>
   );

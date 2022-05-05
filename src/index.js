@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import WeatherService from './WeatherService';
+
+
+const weatherService = new WeatherService();
+
+weatherService.getAllCharacters().then(res =>console.log(res.coord));
+let x = weatherService.getAllCharacters().then(res => res.coord);
+console.log(x);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App/>
   </React.StrictMode>
 );
 
