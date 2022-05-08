@@ -3,7 +3,7 @@ import WeatherService from './WeatherService';
 const weatherService = new WeatherService();
 
 
-console.log(weatherService.getAllCharacters().then(res =>res.coord));
+//console.log(weatherService.getAllCharacters().then(res => res));
 //const {x, y} = weatherService.getAllCharacters().then(res =>res.coord); 
 
 

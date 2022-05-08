@@ -14,10 +14,22 @@ class WeatherService {
         return await res.json();
     }
 
-    getAllCharacters = () => {
-        return this.getResource(`https://api.openweathermap.org/data/2.5/weather?lat=39&lon=120&appid=06fedfea606ed7b940e224fe7059c6a6`);
+    ///getAllCharacters = () => {
+    //    return this.getResource(`https://api.openweathermap.org/data/2.5/weather?lat=39&lon=120&appid=06fedfea606ed7b940e224fe7059c6a6`);
+    //}
+
+    getAllCharacters = async () => {
+        const res = await this.getResource(`https://api.openweathermap.org/data/2.5/weather?lat=39&lon=120&appid=06fedfea606ed7b940e224fe7059c6a6`);
+        return this._transformCharacter(res);
     }
 
+    _transformCharacter = (res) => {
+        return {
+            coord_x: res.coord.lon,
+            coord_y: res.coord.lat,
+            weather: res.weather[0].description,
+        }
+    }
   
 }
 

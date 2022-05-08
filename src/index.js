@@ -8,9 +8,9 @@ import WeatherService from './WeatherService';
 
 const weatherService = new WeatherService();
 
-weatherService.getAllCharacters().then(res =>console.log(res.coord));
-let x = weatherService.getAllCharacters().then(res => res.coord);
-console.log(x);
+weatherService.getAllCharacters().then(res =>console.log(res));
+//let x = weatherService.getAllCharacters().then(res => res);
+//console.log(x);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
