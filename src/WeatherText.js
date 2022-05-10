@@ -1,20 +1,56 @@
+import { Component } from 'react';
 import WeatherService from './WeatherService';
 
-const weatherService = new WeatherService();
+class WeatherText extends Component {
+   constructor (props) {
+     super(props);
+     this.updateChar();
+   }
 
+    state = {
+       lat: null,
+       lon: null,
+       weather: null,
+       country: null,
+       name: null
+    }
 
-//console.log(weatherService.getAllCharacters().then(res => res));
-//const {x, y} = weatherService.getAllCharacters().then(res =>res.coord); 
+    weatherService = new WeatherService();
 
+    updateChar = () => {
+      this.weatherService
+      .getAllCharacters()
+      .then(res => {
+        this.setState({
+          lat: res.coord_x,
+          lon: res.coord_y,
+          weather: res.weather,
+          country: res.country,
+          name: res.name
 
-function WeatherText(props) {
+        })
+      })
+    }
+    
 
-
-  return (
-     <h1>
-        {props.text}
-      </h1>
-  );
+    render() {
+        const {lat, lon, weather, country, name} = this.state;
+        return (
+            
+                <div >
+                    <div >
+                        <p>Широта: {lat}</p>
+                        <p>Долгота: {lon}</p>
+                        <p>Страна: {country}</p>
+                        <p>Место: {name}</p>
+                        <p>Погода: {weather}</p>
+                        
+                    </div>
+                </div>
+           
+            
+        )
+    }
 }
-
 export default WeatherText;
+

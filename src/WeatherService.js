@@ -1,25 +1,19 @@
 class WeatherService {
-    //_apiBase = 'https://gateway.marvel.com:443/v1/public/';
-    // ЗДЕСЬ БУДЕТ ВАШ КЛЮЧ, ЭТОТ КЛЮЧ МОЖЕТ НЕ РАБОТАТЬ
-    _apiKey = 'apikey=c5d6fc8b83116d92ed468ce36bac6c62';
+    
+    _apiKey = '06fedfea606ed7b940e224fe7059c6a6';
 
     getResource = async (url) => {
         let res = await fetch(url);
-    
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, status: ${res.status}`);
         }
-   
-    
         return await res.json();
     }
 
-    ///getAllCharacters = () => {
-    //    return this.getResource(`https://api.openweathermap.org/data/2.5/weather?lat=39&lon=120&appid=06fedfea606ed7b940e224fe7059c6a6`);
-    //}
-
     getAllCharacters = async () => {
-        const res = await this.getResource(`https://api.openweathermap.org/data/2.5/weather?lat=39&lon=120&appid=06fedfea606ed7b940e224fe7059c6a6`);
+        let lat = Math.floor(Math.random() * (80 - 20) + 20);
+        let lon = Math.floor(Math.random() * (80 - 20) + 20);
+        const res = await this.getResource(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${this._apiKey}`);
         return this._transformCharacter(res);
     }
 
@@ -28,6 +22,8 @@ class WeatherService {
             coord_x: res.coord.lon,
             coord_y: res.coord.lat,
             weather: res.weather[0].description,
+            country: res.sys.country,
+            name: res.name
         }
     }
   
