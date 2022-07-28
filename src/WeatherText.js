@@ -1,56 +1,48 @@
 import { Component } from 'react';
 import WeatherService from './WeatherService';
+import Spinner from './Spinner';
+import View from './View'
+
 
 class WeatherText extends Component {
-   constructor (props) {
-     super(props);
-     this.updateChar();
+
+   state = {
+    res: {},
+    loading: true
    }
-
-    state = {
-       lat: null,
-       lon: null,
-       weather: null,
-       country: null,
-       name: null
-    }
-
-    weatherService = new WeatherService();
-
-    updateChar = () => {
-      this.weatherService
-      .getAllCharacters()
-      .then(res => {
-        this.setState({
-          lat: res.coord_x,
-          lon: res.coord_y,
-          weather: res.weather,
-          country: res.country,
-          name: res.name
-
-        })
-      })
-    }
     
+   weatherService = new WeatherService();
 
-    render() {
-        const {lat, lon, weather, country, name} = this.state;
-        return (
-            
-                <div >
-                    <div >
-                        <p>Широта: {lat}</p>
-                        <p>Долгота: {lon}</p>
-                        <p>Страна: {country}</p>
-                        <p>Место: {name}</p>
-                        <p>Погода: {weather}</p>
-                        
-                    </div>
-                </div>
-           
-            
-        )
-    }
+   componentDidMount () {
+    //this.foo.bar=0;
+    this.updateInfo();
+    console.log(this.state);
+  }
+
+  onInfoLoaded = (res) => {
+    console.log(res);
+    this.setState({res, loading: false})
+    //console.log(this.state);
+  }
+
+  updateInfo = () => {
+    this.weatherService
+      .getInfo()
+      .then(this.onInfoLoaded) //из-за промиса
+     // console.log(this.state); //из-за асинхронности
+ }
+    
+ render() {
+   const {res, loading} = this.state;
+   return (
+     <div>
+       {loading ? <Spinner/> : <View res={res}/>}
+     </div>
+   )
+ }
 }
+
+
+
 export default WeatherText;
 
