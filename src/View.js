@@ -9,11 +9,11 @@ class View extends Component {
 
   state = {res: {},
             field: ""
-            
-        }
+          }
 
  weatherService = new WeatherService();
   
+ 
  updateInfo = (info) => {
   console.log(info);
   this.weatherService
